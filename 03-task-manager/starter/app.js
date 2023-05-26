@@ -6,6 +6,7 @@ require("dotenv").config()
 const tasks = require("./router/tasks");
 
 const notFound=require("./middleware/notFound")
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 //middleware
 app.use(express.static('./public'))
@@ -14,6 +15,8 @@ app.use(express.json()); //with out this we dont have data in req.body
 //routes
 app.use("/api/v1/tasks", tasks); //root roter for tasks router
 app.use(notFound);
+app.use(errorHandlerMiddleware);
+
 
 const port = 3000;
 const start = async () => {
